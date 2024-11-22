@@ -12,7 +12,7 @@ https://support.lusid.com/knowledgebase/article/KA-01799/
 """
 
 
-def configure():
+def configure(env):
     validate_instruments = SystemConfigResource(
         id="validate-instruments",
         code="TransactionBooking",

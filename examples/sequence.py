@@ -8,7 +8,7 @@ The script configures the following entities:
 """
 
 
-def configure():
+def configure(env):
     seq1 = sequence.SequenceResource(
         id="seq1",
         scope="sc1",

@@ -13,7 +13,7 @@ https://support.lusid.com/knowledgebase/article/KA-01855/
 """
 
 
-def configure():
+def configure(env):
     dom_ccy = property.DefinitionRef(
         id="dfdomccy", domain=property.Domain.Holding, scope="default", code="DfDomCcy"
     )

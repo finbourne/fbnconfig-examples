@@ -11,7 +11,7 @@ https://support.lusid.com/knowledgebase/article/KA-01750/en-us
 """
 
 
-def configure():
+def configure(env):
     ce = customentity.EntityTypeResource(
         id="ce1",
         entityTypeName="entity-type-name",

@@ -22,7 +22,7 @@ https://support.lusid.com/knowledgebase/article/KA-01738/
 """
 
 
-def configure():
+def configure(env):
 
     #
     # create a set and some items inside

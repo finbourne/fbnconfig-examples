@@ -13,7 +13,7 @@ https://support.lusid.com/knowledgebase/article/KA-01794/
 """
 
 
-def configure():
+def configure(env):
     admin = identity.IdentityRoleRef(id="admin-ref", name="instrument-administrator")
     operator = identity.IdentityRoleResource(id="role1", description="scheduler-operators", name="role1")
 

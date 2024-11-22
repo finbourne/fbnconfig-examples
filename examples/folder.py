@@ -23,7 +23,7 @@ https://support.lusid.com/knowledgebase/article/KA-01635/
 """
 
 
-def configure():
+def configure(env):
     f1 = drive.FolderResource(id="base_folder", name="example_directory", parent=drive.root)
     f2 = drive.FolderResource(id="sub_folder", name="subfolder", parent=f1)
     f3 = drive.FolderResource(id="sub_sub_folder", name="subfolder2", parent=f2)

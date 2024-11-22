@@ -12,7 +12,7 @@ https://support.lusid.com/knowledgebase/article/KA-01743/
 """
 
 
-def configure():
+def configure(env):
     strategy_type = datatype.DataTypeResource(
         id="datatype-example",
         scope="sc1",

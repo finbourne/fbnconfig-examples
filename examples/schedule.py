@@ -15,7 +15,7 @@ https://support.lusid.com/knowledgebase/article/KA-02049/
 """
 
 
-def configure():
+def configure(env):
     tag = "s17"
 
     image = scheduler.ImageResource(
@@ -55,6 +55,7 @@ def configure():
         job=job,
         description="Example schedule",
         arguments={"arg1": "none-default-value"},
+        enabled=False
     )
 
     return Deployment("scheduler_example", [image, job, schedule])

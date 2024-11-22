@@ -12,7 +12,7 @@ https://support.lusid.com/knowledgebase/article/KA-01749/
 """
 
 
-def configure():
+def configure(env):
     test_side1 = side_definition.SideResource(
         id="side1",
         side="Side1",

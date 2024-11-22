@@ -15,7 +15,7 @@ For more information on these resources, please refer to their dedicated example
 """
 
 
-def configure():
+def configure(env):
     client_folder = drive.FolderResource(id="base_folder", name="example_folder", parent=drive.root)
     files_folder = drive.FolderResource(id="files", name="files", parent=client_folder)
 

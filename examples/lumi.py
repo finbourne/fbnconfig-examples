@@ -18,7 +18,7 @@ https://support.lusid.com/knowledgebase/article/KA-01767/
 """
 
 
-def configure():
+def configure(env):
     lumi.ViewResource.Registration.wait_time = 30
     xlsx = "./data/example-spreadsheet.xlsx"
     base_folder = drive.FolderResource(id="base_folder", name="fbnconfig-folder", parent=drive.root)

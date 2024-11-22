@@ -14,7 +14,7 @@ https://support.lusid.com/knowledgebase/article/KA-01908/
 """
 
 
-def configure():
+def configure(env):
     selector = access.IdSelector(
         name="ExampleId",
         description="Example ID selector",
