@@ -19,14 +19,14 @@ https://support.lusid.com/knowledgebase/article/KA-01767/
 
 def configure(env):
     lumi.ViewResource.Registration.wait_time = 30
-    xlsx = "./data/example-spreadsheet.xlsx"
+    xlsx = "../data/example-spreadsheet.xlsx"
     base_folder = drive.FolderResource(id="base_folder", name="fbnconfig-folder", parent=drive.root)
     deployment_folder = drive.FolderResource(
         id="sub_folder", name="deployment-folder", parent=base_folder
     )
     content_path = pathlib.Path(__file__).parent.resolve() / pathlib.Path(xlsx)
     spreadsheet = drive.FileResource(
-        id="xslx", folder=deployment_folder, name=xlsx, content_path=content_path
+        id="xslx", folder=deployment_folder, name="example-spreadsheet.xlsx", content_path=content_path
     )
     xlsx_sql = f"""\
         -- Pull data from the spreadsheet
@@ -64,7 +64,7 @@ def configure(env):
                 name="p1",
                 value=10,
                 set_as_default_value=True,
-                tooltip="a number",
+                tooltip="a number, defaults to 10",
                 type=lumi.ParameterType.Int,
             ),
             lumi.Parameter(
