@@ -1,6 +1,4 @@
-from fbnconfig import drive
-from fbnconfig import scheduler
-from fbnconfig import Deployment
+from fbnconfig import Deployment, drive, scheduler
 
 """
 An example configuration for defining various entities.
@@ -54,7 +52,4 @@ def configure(env):
         description="Example shcedule description",
     )
 
-    return Deployment(
-        "mixed_example",
-        [client_folder, files_folder, file, image, job, schedule],
-    )
+    return Deployment("mixed_example", [client_folder, files_folder, file, image, job, schedule])

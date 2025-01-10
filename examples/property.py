@@ -1,6 +1,4 @@
-from fbnconfig import property
-from fbnconfig import datatype
-from fbnconfig import Deployment
+from fbnconfig import Deployment, datatype, property
 
 """
 An example configuration for defining property related entities.
@@ -27,12 +25,12 @@ def configure(env):
         domain=property.Domain.Instrument,
         scope="sc1",
         code="rating",
-        displayName="Rating",
-        dataTypeId=datatype.DataTypeRef(id="default_str", scope="system", code="string"),
-        constraintStyle=property.ConstraintStyle.Collection,
-        propertyDescription="Example property representing a rating",
-        lifeTime=property.LifeTime.Perpetual,
-        collectionType=property.CollectionType.Array,
+        display_name="Rating",
+        data_type_id=datatype.DataTypeRef(id="default_str", scope="system", code="string"),
+        constraint_style=property.ConstraintStyle.Collection,
+        property_description="Example property representing a rating",
+        life_time=property.LifeTime.Perpetual,
+        collection_type=property.CollectionType.Array,
     )
 
     instrument_property_definition = property.DefinitionResource(
@@ -40,34 +38,34 @@ def configure(env):
         domain=property.Domain.Instrument,
         scope="sc1",
         code="pd1",
-        displayName="Property definition example",
-        dataTypeId=property.ResourceId(scope="system", code="number"),
-        constraintStyle=property.ConstraintStyle.Property,
-        propertyDescription="Example property definition",
-        lifeTime=property.LifeTime.Perpetual,
-        collectionType=None,
+        display_name="Property definition example",
+        data_type_id=property.ResourceId(scope="system", code="number"),
+        constraint_style=property.ConstraintStyle.Property,
+        property_description="Example property definition",
+        life_time=property.LifeTime.Perpetual,
+        collection_type=None,
     )
 
     pv_nominal = property.DefinitionResource(
         id="derived",
         domain=property.Domain.Holding,
-        dataTypeId=property.ResourceId(scope="system", code="number"),
+        data_type_id=property.ResourceId(scope="system", code="number"),
         scope="sc1",
         code="PVNominal",
-        propertyDescription="Example derived property",
-        displayName="DF Nominal",
-        derivationFormula=property.Formula("{x} * {y}", x=dom_ccy, y=nominal),
+        property_description="Example derived property",
+        display_name="DF Nominal",
+        derivation_formula=property.Formula("{x} * {y}", x=dom_ccy, y=nominal),
     )
 
     derived_property = property.DefinitionResource(
         id="derived_property",
         domain=property.Domain.Holding,
-        dataTypeId=property.ResourceId(scope="system", code="number"),
+        data_type_id=property.ResourceId(scope="system", code="number"),
         scope="sc1",
         code="derived_property",
-        propertyDescription="pd1 x df x nominal",
-        displayName="DF Nominal pd1",
-        derivationFormula=property.Formula("{x} * {y}", x=pv_nominal, y=instrument_property_definition),
+        property_description="pd1 x df x nominal",
+        display_name="DF Nominal pd1",
+        derivation_formula=property.Formula("{x} * {y}", x=pv_nominal, y=instrument_property_definition),
     )
 
     return Deployment(

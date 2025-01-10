@@ -1,5 +1,4 @@
-from fbnconfig import scheduler
-from fbnconfig import Deployment
+from fbnconfig import Deployment, scheduler
 
 """
 An example configuration for defining scheduler related entities.
@@ -19,10 +18,7 @@ def configure(env):
     tag = "s17"
 
     image = scheduler.ImageResource(
-        id="img1",
-        source_image="docker.io/alpine:latest",
-        dest_name="schedule-example",
-        dest_tag=tag,
+        id="img1", source_image="docker.io/alpine:latest", dest_name="schedule-example", dest_tag=tag
     )
 
     job = scheduler.JobResource(
@@ -32,15 +28,15 @@ def configure(env):
         image=image,
         name="Example Job",
         description="Example job resource",
-        minCpu="1",
-        maxCpu="2",
-        argumentDefinitions={
+        min_cpu="1",
+        max_cpu="2",
+        argument_definitions={
             "arg1": scheduler.EnvironmentArg(
-                dataType="String",
+                data_type="String",
                 required=False,
                 description="Example argument",
                 order=1,
-                defaultValue="default-value",
+                default_value="default-value",
             )
         },
     )
@@ -55,8 +51,7 @@ def configure(env):
         job=job,
         description="Example schedule",
         arguments={"arg1": "none-default-value"},
-        enabled=False
+        enabled=False,
     )
 
     return Deployment("scheduler_example", [image, job, schedule])
-

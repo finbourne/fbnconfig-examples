@@ -1,5 +1,4 @@
-from fbnconfig import Deployment, transaction_type
-from fbnconfig import side_definition
+from fbnconfig import Deployment, side_definition, transaction_type
 
 """
 An example configuration for defining transaction configuration related entities.

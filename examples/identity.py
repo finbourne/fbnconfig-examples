@@ -1,5 +1,4 @@
-from fbnconfig import identity
-from fbnconfig import Deployment
+from fbnconfig import Deployment, identity
 
 """
 An example configuration for defining Identity related entities.
@@ -21,9 +20,9 @@ def configure(env):
     # do not wish for that to happen.
     user = identity.UserResource(
         id="user1",
-        firstName="Example",
-        lastName="User",
-        emailAddress="example_user@example.org",
+        first_name="Example",
+        last_name="User",
+        email_address="example_user@example.org",
         login="example_service_user@example.com",
         type=identity.UserType.SERVICE,
     )

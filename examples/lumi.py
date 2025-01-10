@@ -1,7 +1,6 @@
-from fbnconfig import lumi
-from fbnconfig import Deployment
-from fbnconfig import drive
 import pathlib
+
+from fbnconfig import Deployment, drive, lumi
 
 """
 An example configuration for defining Luminesce views.
@@ -10,7 +9,7 @@ The script configures the following entities:
 - File
 - View
 
-For more information on Folder and File resources, please refer to the `folder.py`
+For more information on Folder and File resources, please refer to the `drive.py`
 example.
 
 More information can be found here:
@@ -43,17 +42,17 @@ def configure(env):
         description="Test view for fbnconfig reading a spreadsheet",
         sql=xlsx_sql,
         dependencies=[spreadsheet],
-        useDryRun=True,
+        use_dry_run=True,
     )
     vr_provider = "Views.fbnconfig.ExampleProvider_vr"
     vr = lumi.ViewResource(
         id="lumi-example-view",
         provider=vr_provider,
         description="My resource test view",
-        documentationLink="http://example.com/query4",
-        variableShape=False,
-        useDryRun=True,
-        allowExecuteIndirectly=False,
+        documentation_link="http://example.com/query4",
+        variable_shape=False,
+        use_dry_run=True,
+        allow_execute_indirectly=False,
         distinct=True,
         sql="""
             select 2+#PARAMETERVALUE(p1)
@@ -64,14 +63,14 @@ def configure(env):
             lumi.Parameter(
                 name="p1",
                 value=10,
-                setAsDefaultValue=True,
+                set_as_default_value=True,
                 tooltip="a number",
                 type=lumi.ParameterType.Int,
             ),
             lumi.Parameter(
                 name="p2",
                 value="a default",
-                setAsDefaultValue=True,
+                set_as_default_value=True,
                 tooltip="a string",
                 type=lumi.ParameterType.Text,
             ),
@@ -83,17 +82,17 @@ def configure(env):
         id="lumi-dependent-view",
         provider=v2_provider,
         description="My resource test view",
-        documentationLink="http://example.com/query4",
-        variableShape=False,
-        useDryRun=True,
-        allowExecuteIndirectly=False,
+        documentation_link="http://example.com/query4",
+        variable_shape=False,
+        use_dry_run=True,
+        allow_execute_indirectly=False,
         distinct=True,
         sql=f"select twelve from {vr_provider}",
         parameters=[
             lumi.Parameter(
                 name="num",
                 value=10,
-                setAsDefaultValue=False,
+                set_as_default_value=False,
                 tooltip="a number",
                 type=lumi.ParameterType.Int,
             )
@@ -105,8 +104,8 @@ def configure(env):
         id="lumi-scalar-var-view",
         provider="Views.fbnconfig.ExampleProvider_scalar_var",
         description="View which takes a scalar variable",
-        documentationLink="http://example.com/vars_query",
-        useDryRun=False,
+        documentation_link="http://example.com/vars_query",
+        use_dry_run=False,
         distinct=True,
         sql="select * from #PARAMETERVALUE(num)",
         variables=[seven],
@@ -114,11 +113,10 @@ def configure(env):
             lumi.Parameter(
                 name="num",
                 value=seven,
-                isMandatory=False,
+                is_mandatory=False,
                 tooltip="this should be seven",
                 type=lumi.ParameterType.Table,
             )
         ],
     )
     return Deployment("luminesce_example", [vr, v2, xls_view, scalar_var])
-

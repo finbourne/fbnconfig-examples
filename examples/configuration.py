@@ -1,6 +1,4 @@
-from fbnconfig import configuration
-from fbnconfig import scheduler
-from fbnconfig import Deployment
+from fbnconfig import Deployment, configuration, scheduler
 
 """
 An example configuration for defining configuration sets and their values.
@@ -23,7 +21,6 @@ https://support.lusid.com/knowledgebase/article/KA-01738/
 
 
 def configure(env):
-
     #
     # create a set and some items inside
     #
@@ -40,8 +37,8 @@ def configure(env):
         set=cs,
         key="username",
         value="example-login",
-        valueType=configuration.ValueType.TEXT,
-        isSecret=False,
+        value_type=configuration.ValueType.TEXT,
+        is_secret=False,
         description="Example key value pair representing a username",
     )
 
@@ -50,15 +47,15 @@ def configure(env):
         set=cs,
         key="password",
         value="example-password",
-        valueType=configuration.ValueType.TEXT,
-        isSecret=False,
+        value_type=configuration.ValueType.TEXT,
+        is_secret=False,
         description="Example key value pair representing a password",
     )
 
     #
     # add another set
     #
-    setRef = configuration.SetResource(
+    set_ref = configuration.SetResource(
         id="set2",
         scope="sc2",
         code="cd1",
@@ -66,13 +63,13 @@ def configure(env):
         description="Example shared set resource",
     )
 
-    insItem = configuration.ItemResource(
+    ins_item = configuration.ItemResource(
         id="username2",
-        set=setRef,
+        set=set_ref,
         key="user",
         value="example-login-2",
-        valueType=configuration.ValueType.TEXT,
-        isSecret=False,
+        value_type=configuration.ValueType.TEXT,
+        is_secret=False,
         description="Example key value pair representing a username",
     )
 
@@ -93,18 +90,18 @@ def configure(env):
         image=image,
         name="example-job",
         description="Example of a job using a configuration item",
-        minCpu="1",
-        maxCpu="1",
-        argumentDefinitions={
+        min_cpu="1",
+        max_cpu="1",
+        argument_definitions={
             "username": scheduler.EnvironmentArg(
-                dataType="Configuration",
+                data_type="Configuration",
                 required=False,
                 description="A secret",
                 order=1,
-                defaultValue=username,
+                default_value=username,
             ),
             "password": scheduler.EnvironmentArg(
-                dataType="Configuration", required=False, description="A secret", order=1
+                data_type="Configuration", required=False, description="A secret", order=1
             ),
         },
     )
@@ -124,4 +121,4 @@ def configure(env):
         arguments={"username": username, "password": passwd},
     )
 
-    return Deployment("configuration_example", [schedule, job, insItem, cs, username, passwd])
+    return Deployment("configuration_example", [schedule, job, ins_item, cs, username, passwd])

@@ -1,6 +1,4 @@
-from fbnconfig import property
-from fbnconfig import datatype
-from fbnconfig import Deployment
+from fbnconfig import Deployment, datatype, property
 
 """
 An example configuration for data types.
@@ -17,14 +15,14 @@ def configure(env):
         id="datatype-example",
         scope="sc1",
         code="cd1",
-        typeValueRange=datatype.TypeValueRange.Closed,
-        displayName="Portfolio Strategy Test",
+        type_value_range=datatype.TypeValueRange.CLOSED,
+        display_name="Portfolio Strategy Test",
         description="A test datatype modified",
-        valueType=datatype.ValueType.String,
-        referenceData=datatype.ReferenceData(
-            fieldDefinitions=[
-                datatype.FieldDefinition(key="description", isRequired=True, isUnique=False),
-                datatype.FieldDefinition(key="commission", isRequired=True, isUnique=False),
+        value_type=datatype.ValueType.STRING,
+        reference_data=datatype.ReferenceData(
+            field_definitions=[
+                datatype.FieldDefinition(key="description", is_required=True, is_unique=False),
+                datatype.FieldDefinition(key="commission", is_required=True, is_unique=False),
             ],
             values=[
                 datatype.FieldValue(
@@ -45,22 +43,22 @@ def configure(env):
         domain=property.Domain.Portfolio,
         scope="sc1",
         code="strategy",
-        displayName="Example portfolio strategy",
-        dataTypeId=strategy_type,
-        constraintStyle=property.ConstraintStyle.Property,
-        propertyDescription="Example strategy datatype property",
-        lifeTime=property.LifeTime.Perpetual,
+        display_name="Example portfolio strategy",
+        data_type_id=strategy_type,
+        constraint_style=property.ConstraintStyle.Property,
+        property_description="Example strategy datatype property",
+        life_time=property.LifeTime.Perpetual,
     )
 
     priority_type = datatype.DataTypeResource(
         id="priority",
         scope="sc1",
         code="priority",
-        typeValueRange=datatype.TypeValueRange.Closed,
-        displayName="Priority datatype example",
+        type_value_range=datatype.TypeValueRange.CLOSED,
+        display_name="Priority datatype example",
         description="A datatype for Priority values",
-        valueType=datatype.ValueType.String,
-        acceptableValues=["High", "Medium", "Low"],
+        value_type=datatype.ValueType.STRING,
+        acceptable_values=["High", "Medium", "Low"],
     )
 
     return Deployment("datatype_example", [strategy_type, strategy_prop, priority_type])

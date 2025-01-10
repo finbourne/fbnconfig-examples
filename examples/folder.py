@@ -1,6 +1,6 @@
 import pathlib
-from fbnconfig import drive
-from fbnconfig import Deployment
+
+from fbnconfig import Deployment, drive
 
 """
 An example configuration for LUSID Drive's folder structure.

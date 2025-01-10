@@ -1,5 +1,4 @@
-from fbnconfig import access
-from fbnconfig import Deployment
+from fbnconfig import Deployment, access
 
 """
 An example configuration for defining Access related entities.
@@ -28,7 +27,7 @@ def configure(env):
         description="Example policy",
         applications=["Scheduler"],
         grant=access.Grant.ALLOW,
-        selectors=[{"idSelectorDefinition": selector}],
+        selectors=[selector],
         when=access.WhenSpec(activate="2020-01-01T00:00:00.0000000+00:00"),
     )
 
@@ -36,7 +35,9 @@ def configure(env):
         id="ExampleRole",
         code="cd1",
         description="Example role",
-        policy_resource=access.PolicyIdRoleResource(policies=[policy]),
+        resource=access.RoleResourceRequest(
+            policy_id_role_resource=access.PolicyIdRoleResource(policies=[policy])
+        ),
         when=access.WhenSpec(activate="2020-01-01T00:00:00.0000000+00:00"),
         permission=access.Permission.READ,
     )
