@@ -1,7 +1,7 @@
 import csv
 import os
 
-from fbnconfig import property, Deployment
+from fbnconfig import Deployment, property
 
 
 def configure(env):
@@ -9,10 +9,11 @@ def configure(env):
     properties = []
 
     csv_path = os.path.join(
-        os.path.dirname(os.path.realpath(__file__)), "..", "data", "property_definitions.csv")
+        os.path.dirname(os.path.realpath(__file__)), "..", "data", "property_definitions.csv"
+    )
 
     # Read the CSV file
-    with (open(csv_path, mode="r", newline="") as file):
+    with open(csv_path, mode="r", newline="") as file:
         reader = csv.DictReader(file)
 
         # Parse each row and create Property instances
@@ -30,7 +31,7 @@ def configure(env):
                 constraint_style=property.ConstraintStyle[row["ConstraintStyle"]],
                 property_description=row["Description"],
                 life_time=property.LifeTime[row["Lifetime"]],
-                collection_type=None
+                collection_type=None,
             )
             properties.append(property_definition)
 
