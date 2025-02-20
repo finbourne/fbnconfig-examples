@@ -27,6 +27,8 @@ def configure(env):
     f1 = drive.FolderResource(id="base_folder", name="example_directory", parent=drive.root)
     f2 = drive.FolderResource(id="sub_folder", name="subfolder", parent=f1)
     f3 = drive.FolderResource(id="sub_sub_folder", name="subfolder2", parent=f2)
-    content_path = pathlib.Path(__file__).parent.resolve() / pathlib.Path("./data/lorem-ipsum.txt")
+
+    content_path = (pathlib.Path(__file__).parent.parent.resolve()
+                    / pathlib.Path("./data/lorem-ipsum.txt"))
     ff = drive.FileResource(id="file1", folder=f3, name="file.txt", content_path=content_path)
     return Deployment("folder_example", [f1, f2, f3, ff])
