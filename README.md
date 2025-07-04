@@ -207,7 +207,7 @@ def configure(env):
         id="user2",
         ...
         emailAddress=f"exports@{company}",
-        login=f"exports@{company}",
+        login=f"exports@{company}"
     )
 ```
 
@@ -226,7 +226,8 @@ The Python variables for the Resources need to be added to the `Deployment` and 
 
 ### Using `fbnconfig` as a library
 
-Using `fbnconfig` from the commandline dyamically loads your Python script and executes the `Deployment`. In some cases (for example using `fbnconfig` as part of another application) you can call it from Python as well.
+Using `fbnconfig` from the commandline dynamically loads your Python script and executes the `Deployment`.
+In some cases (for example using `fbnconfig` as part of another application) you can call it from Python as well.
 
 The following example creates an empty `Deployment` called "my-jobs":
 
