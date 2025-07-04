@@ -139,7 +139,7 @@ def configure(host_vars) -> Deployment:
                 end as Result
                 from @price_ts
                 where not Result = 'OK';
-                
+
             select #SELECT {
                 {PriceDate~DateTime : PriceDate},
                 {QuoteScope~Text : QuoteScope},
@@ -221,7 +221,7 @@ def configure(host_vars) -> Deployment:
                 from @price_ts p
                 join @iqr_data i on p.ClientInternal = i.ClientInternal
                 where not Result = 'OK';
-                
+
                 select #SELECT {
                     {PriceDate~DateTime : PriceDate},
                     {QuoteScope~Text : QuoteScope},
