@@ -28,4 +28,12 @@ def configure(env):
     )
     assignment1 = identity.RoleAssignment(id="operator", user=user, role=operator)
     assignment2 = identity.RoleAssignment(id="admin", user=user, role=admin)
-    return Deployment("identity_example", [assignment1, assignment2, user, operator])
+
+    application = identity.ApplicationResource(
+        id="example",
+        client_id="example-id",
+        display_name="Example",
+        application_type=identity.ApplicationType.NATIVE,
+    )
+
+    return Deployment("identity_example", [assignment1, assignment2, user, operator, application])
