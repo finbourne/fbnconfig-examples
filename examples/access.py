@@ -42,4 +42,25 @@ def configure(env):
         permission=access.Permission.READ,
     )
 
-    return Deployment("access_example", [role])
+    selector = access.IdSelector(
+        name="ExampleId",
+        description="Example ID selector",
+        identifier={"scope": "sc1", "code": "cd1"},
+        actions=[access.ActionId(scope="sc1", activity="execute", entity="Feature")],
+    )
+
+    templated_selector = access.TemplatedSelector(
+        application="Scheduler",
+        tag="Data",
+        selector=selector
+    )
+
+    policy_template = access.PolicyTemplateResource(
+        id="ExamplePolicyTemplate",
+        display_name="display_name",
+        code="cd2",
+        description="Example description",
+        templated_selectors=[templated_selector]
+    )
+
+    return Deployment("access_example", [role, policy_template])
