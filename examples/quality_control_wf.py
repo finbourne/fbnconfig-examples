@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 from fbnconfig import Deployment, drive, lumi
 from fbnconfig import workflows as wf
@@ -15,7 +16,7 @@ def configure(host_vars) -> Deployment:
     deployment_folder = drive.FolderResource(id="sub_folder", name=deployment_name, parent=base_folder)
 
     spreadsheet = drive.FileResource(
-        id="xslx", folder=deployment_folder, name=file_name, content_path=excel_path
+        id="xslx", folder=deployment_folder, name=file_name, content_path=pathlib.PurePath(excel_path)
     )
 
     import_from_excel_view = lumi.ViewResource(

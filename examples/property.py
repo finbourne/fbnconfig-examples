@@ -65,7 +65,11 @@ def configure(env):
         code="derived_property",
         property_description="pd1 x df x nominal",
         display_name="DF Nominal pd1",
-        derivation_formula=property.Formula("{x} * {y}", x=pv_nominal, y=instrument_property_definition),
+        derivation_formula=property.Formula(
+            "{x} * {y}",
+            x=pv_nominal,
+            y=instrument_property_definition
+        ),
     )
 
     return Deployment(
