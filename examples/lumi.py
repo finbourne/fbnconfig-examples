@@ -1,13 +1,15 @@
+import datetime as dt
 import pathlib
 
-from fbnconfig import Deployment, drive, lumi
+from fbnconfig import Deployment, drive, lumi, property
 
 """
-An example configuration for defining Luminesce views.
+An example configuration for defining Luminesce views and inlined properties.
 The script configures the following entities:
 - Folder
 - File
 - View
+- Inlined Properties
 
 For more information on Folder and File resources, please refer to the `drive.py`
 example.
@@ -119,4 +121,23 @@ def configure(env):
             )
         ],
     )
-    return Deployment("luminesce_example", [vr, v2, xls_view, scalar_var])
+    # Create inline properties resource
+    test_property_ref = property.DefinitionRef(
+        id="test-property-ref", domain=property.Domain.Transaction, scope="default", code="Custodian"
+    )
+    inline_properties = lumi.InlinePropertiesResource(
+        id="test-inline-properties",
+        provider="Lusid.Portfolio.Txn",
+        provider_name_extension="Example",
+        properties=[
+            lumi.InlineProperty(
+                key=test_property_ref,
+                name="TestProperty",
+                data_type=lumi.InlineDataType.Text,
+                description="Test property for integration testing",
+                is_main=True,
+                as_at=dt.datetime(2025, 9, 20)
+            )
+        ],
+    )
+    return Deployment("luminesce_example", [vr, v2, xls_view, scalar_var, inline_properties])
