@@ -33,7 +33,7 @@ def configure(env):
         id="example",
         client_id="example-id",
         display_name="Example",
-        application_type=identity.ApplicationType.NATIVE,
+        type=identity.ApplicationType.NATIVE,
     )
 
     return Deployment("identity_example", [assignment1, assignment2, user, operator, application])
