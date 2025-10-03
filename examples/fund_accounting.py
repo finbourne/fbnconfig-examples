@@ -23,7 +23,7 @@ def configure(env):
         collection_type=property.CollectionType.Array,
     )
 
-    chart_property = fund_accounting.PerpetualProperty(
+    chart_property = fund_accounting.PropertyValue(
         property_key=rating,
         label_value="Example_label"
     )
@@ -50,7 +50,7 @@ def configure(env):
         collection_type=None,
     )
 
-    account_property = fund_accounting.PerpetualProperty(
+    account_property = fund_accounting.PropertyValue(
         property_key=instrument_property_definition,
         label_value="Goodbye"
     )
