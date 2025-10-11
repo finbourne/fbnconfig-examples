@@ -1,10 +1,11 @@
-from fbnconfig import Deployment, datatype, fund_accounting, property
+from fbnconfig import Deployment, datatype, fund_accounting, posting_module, property
 
 """
 An example configuration for defining fund accounting related entities.
 The script configures the following entities:
 - Chart of accounts
 - Accounts within a chart of account
+- Posting module
 """
 
 
@@ -66,4 +67,19 @@ def configure(env):
         properties=[account_property]
     )
 
-    return Deployment("fund_accounting_example", [chart_of_account, account])
+    rule = posting_module.PostingModuleRule(
+        rule_id="example_rule",
+        general_ledger_account_code=account,
+        rule_filter="SourceType eq 'LusidTransaction'"
+    )
+
+    posting_mod = posting_module.PostingModuleResource(
+        id="posting_module_id",
+        chart_of_accounts=chart_of_account,
+        code="module_code",
+        display_name="example_display_name",
+        description="example_description",
+        rules=[rule]
+    )
+
+    return Deployment("fund_accounting_example", [chart_of_account, account, posting_mod])
