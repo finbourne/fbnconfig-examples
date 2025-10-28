@@ -10,76 +10,80 @@ The script configures the following entities:
 
 
 def configure(env):
+    scope = "example-scope"
 
-    rating = property.DefinitionResource(
-        id="rating",
+    fund_manager_property = property.DefinitionResource(
+        id="fund_manager_prop",
         domain=property.Domain.ChartOfAccounts,
-        scope="sc1",
-        code="rating",
-        display_name="Rating",
+        scope=scope,
+        code="FundManagerName",
+        display_name="FundManagerName",
         data_type_id=datatype.DataTypeRef(id="default_str", scope="system", code="string"),
-        constraint_style=property.ConstraintStyle.Collection,
-        property_description="Example property representing a rating",
+        constraint_style=property.ConstraintStyle.Property,
+        property_description="FundManagerName",
         life_time=property.LifeTime.Perpetual,
-        collection_type=property.CollectionType.Array,
     )
 
     chart_property = fund_accounting.PropertyValue(
-        property_key=rating,
-        label_value="Example_label"
+        property_key=fund_manager_property, label_value="John Smith"
     )
 
     chart_of_account = fund_accounting.ChartOfAccountsResource(
         id="example_chart",
-        scope="example_scope",
-        code="example_code",
-        display_name="example_display_name",
-        description="example_description",
-        properties=[chart_property]
+        scope=scope,
+        code="DailyCoA",
+        display_name="This is a CoA for a daily NAV",
+        description="This is a CoA for a daily NAVn",
+        properties=[chart_property],
     )
 
-    instrument_property_definition = property.DefinitionResource(
+    account_property_definition = property.DefinitionResource(
         id="pd1",
         domain=property.Domain.Account,
-        scope="sc1",
-        code="pd1",
-        display_name="Property definition example",
-        data_type_id=property.ResourceId(scope="system", code="number"),
+        scope=scope,
+        code="AccountantName",
+        display_name="AccountantName",
+        data_type_id=property.ResourceId(scope="system", code="string"),
         constraint_style=property.ConstraintStyle.Property,
-        property_description="Example property definition",
+        property_description="AccountantName",
         life_time=property.LifeTime.Perpetual,
         collection_type=None,
     )
 
     account_property = fund_accounting.PropertyValue(
-        property_key=instrument_property_definition,
-        label_value="Goodbye"
+        property_key=account_property_definition, label_value="Jane Miller"
     )
 
     account = fund_accounting.AccountResource(
         id="example_account",
         chart_of_accounts=chart_of_account,
-        code="account_code",
-        description="example_desc",
+        code="1-Investments",
+        description="Cash",
         type=fund_accounting.AccountType.ASSET,
         status=fund_accounting.AccountStatus.ACTIVE,
         control="Manual",
-        properties=[account_property]
+        properties=[account_property],
     )
 
-    rule = posting_module.PostingModuleRule(
-        rule_id="example_rule",
+    rule_1 = posting_module.PostingModuleRule(
+        rule_id="rule_0001",
         general_ledger_account_code=account,
-        rule_filter="SourceType eq 'LusidTransaction'"
+        rule_filter="EconomicBucket startswith 'NA' and HoldType neq 'P'",
+    )
+
+    rule_2 = posting_module.PostingModuleRule(
+        rule_id="rule_0002",
+        general_ledger_account_code=account,
+        rule_filter="EconomicBucket startswith 'NA' and HoldType eq 'C'",
     )
 
     posting_mod = posting_module.PostingModuleResource(
         id="posting_module_id",
         chart_of_accounts=chart_of_account,
-        code="module_code",
-        display_name="example_display_name",
-        description="example_description",
-        rules=[rule]
+        code="DailyPM",
+        display_name="Daily NAV posting module",
+        description="This is a posting module for daily NAV",
+        rules=[rule_1, rule_2],
     )
 
     return Deployment("fund_accounting_example", [chart_of_account, account, posting_mod])
