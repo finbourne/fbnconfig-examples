@@ -9,26 +9,22 @@ The script configures the following entities:
 
 
 def configure(env):
-    rating = property.DefinitionResource(
-        id="rating",
-        domain=property.Domain.ChartOfAccounts,
+    definition = property.DefinitionResource(
+        id="ExampleDefinition",
+        domain=property.Domain.IdentifierDefinition,
         scope="sc1",
-        code="rating",
-        display_name="Rating",
+        code="cd1",
+        display_name="Example Definition Resource",
         data_type_id=datatype.DataTypeRef(id="default_str", scope="system", code="string"),
-        constraint_style=property.ConstraintStyle.Collection,
-        property_description="Example property representing a rating",
-        life_time=property.LifeTime.Perpetual,
-        collection_type=property.CollectionType.Array,
     )
 
     identifier_property = identifier_definition.PropertyValue(
-        property_key=rating,
+        property_key=definition,
         label_value="Example_label"
     )
 
     id_def = identifier_definition.IdentifierDefinitionResource(
-        id="idExample",
+        id="ExampleIdentifierDefinition",
         domain=identifier_definition.SupportedDomain.Instrument,
         identifier_scope="ScopeExample",
         identifier_type="TypeExample",
@@ -40,4 +36,4 @@ def configure(env):
         properties=[identifier_property]
     )
 
-    return Deployment("identifier_definition_example", [id_def])
+    return Deployment("identifier_definition_example", [id_def, definition])
