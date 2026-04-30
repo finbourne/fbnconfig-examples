@@ -1,4 +1,3 @@
-import datetime as dt
 import pathlib
 
 from fbnconfig import Deployment, drive, lumi, property
@@ -136,7 +135,6 @@ def configure(env):
                 data_type=lumi.InlineDataType.Text,
                 description="Test property for integration testing",
                 is_main=True,
-                as_at=dt.datetime(2025, 9, 20)
             )
         ],
     )
