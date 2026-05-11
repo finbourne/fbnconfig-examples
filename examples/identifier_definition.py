@@ -12,8 +12,8 @@ def configure(env):
     definition = property.DefinitionResource(
         id="ExampleDefinition",
         domain=property.Domain.IdentifierDefinition,
-        scope="sc1",
-        code="cd1",
+        scope="example-sc1",
+        code="example-cd1",
         display_name="Example Definition Resource",
         data_type_id=datatype.DataTypeRef(id="default_str", scope="system", code="string"),
     )
@@ -26,8 +26,8 @@ def configure(env):
     id_def = identifier_definition.IdentifierDefinitionResource(
         id="ExampleIdentifierDefinition",
         domain=identifier_definition.SupportedDomain.Instrument,
-        identifier_scope="ScopeExample",
-        identifier_type="TypeExample",
+        identifier_scope="IdentScopeExample",
+        identifier_type="IdentTypeExample",
         life_time=LifeTime.Perpetual,
         hierarchy_usage="MasterIdentifier",
         hierarchy_level="hierarchyLevelExample",
