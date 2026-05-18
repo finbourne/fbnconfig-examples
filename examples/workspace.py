@@ -49,10 +49,9 @@ def make_personal_branch(user):
 
 def configure(env):
     deployment_name = getattr(env, "name", "workspace_example")
-    orgs = ["operations", "equity-trading", "compliance", "risk-management", "market-data"]
-    regions = ["emea", "apac", "us", "latam"]
-    users = ["bill", "ted", "john", "paul", "ringo", "diana-ross", "florence", "mary-wilson",
-        "micheal", "jermaine", "jackie", "marlon", "lionel", "william", "walter", "james-dean"]
+    orgs = ["operations", "equity-trading"]
+    regions = ["emea", "apac"]
+    users = ["john", "paul", "ringo"]
     resources = []
     for org in orgs:
         for region in regions:
