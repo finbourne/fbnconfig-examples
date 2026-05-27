@@ -1,4 +1,4 @@
-from fbnconfig import Deployment, access
+from fbnconfig import Deployment, access, identity
 
 """
 An example configuration for defining Access related entities.
@@ -31,9 +31,16 @@ def configure(env):
         when=access.WhenSpec(activate="2020-01-01T00:00:00.0000000+00:00"),
     )
 
+    identity_role = identity.IdentityRoleResource(
+        id="ExampleIdentityRole",
+        name="cd1",
+        description="Example identity role",
+    )
+
     role = access.RoleResource(
         id="ExampleRole",
         code="cd1",
+        identity_role=identity_role,
         description="Example role",
         resource=access.RoleResourceRequest(
             policy_id_role_resource=access.PolicyIdRoleResource(policies=[policy])

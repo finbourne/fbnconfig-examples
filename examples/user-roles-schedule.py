@@ -106,6 +106,7 @@ def configure(host_vars):
     access_role = access.RoleResource(
         id="access_role",
         code=role_name,
+        identity_role=identity_role,
         description="Grants access to the export folder",
         resource=access.RoleResourceRequest(
             policy_id_role_resource=access.PolicyIdRoleResource(policies=[feature_policy, data_policy])

@@ -36,19 +36,20 @@ def configure(_):
         when=access.WhenSpec(activate=start_date),
         description="Allow full admin access to the UK trading workspace and items within",
     )
-    # access role for admin to hold the permissions
-    admin_access_role = access.RoleResource(
-        id="admin_access_role",
-        code="data_admin_example_trading_uk",
-        resource=access.RoleResourceRequest(policy_id_role_resource=access.PolicyIdRoleResource(policies=[admin_data_policy])),
-        when=access.WhenSpec(activate=start_date),
-        permission=access.Permission.EXECUTE,
-    )
     # identity role for admin to hold the users. Adding this role to a user will make them an admin
     admin_identity_role = identity.IdentityRoleResource(
         id="admin_identity_role",
         name="data_admin_example_trading_uk",
         description="irole workspace_data",
+    )
+    # access role for admin to hold the permissions
+    admin_access_role = access.RoleResource(
+        id="admin_access_role",
+        code="data_admin_example_trading_uk",
+        identity_role=admin_identity_role,
+        resource=access.RoleResourceRequest(policy_id_role_resource=access.PolicyIdRoleResource(policies=[admin_data_policy])),
+        when=access.WhenSpec(activate=start_date),
+        permission=access.Permission.EXECUTE,
     )
     #
     # Workspace reader
@@ -75,19 +76,20 @@ def configure(_):
         when=access.WhenSpec(activate=start_date),
         description="Allow read access to UK trading workspace and items",
     )
-    # access role for read permissions
-    read_access_role = access.RoleResource(
-        id="read_access_role",
-        code="data_read_example_trading_uk",
-        resource=access.RoleResourceRequest(policy_id_role_resource=access.PolicyIdRoleResource(policies=[read_data_policy])),
-        when=access.WhenSpec(activate=start_date),
-        permission=access.Permission.EXECUTE,
-    )
     # identity role for read. Adding this role to a user will allow them to read workspace items
     read_identity_role = identity.IdentityRoleResource(
         id="read_identity_role",
         name="data_read_example_trading_uk",
         description="Allow read access to UK trading workspace and items",
+    )
+    # access role for read permissions
+    read_access_role = access.RoleResource(
+        id="read_access_role",
+        code="data_read_example_trading_uk",
+        identity_role=read_identity_role,
+        resource=access.RoleResourceRequest(policy_id_role_resource=access.PolicyIdRoleResource(policies=[read_data_policy])),
+        when=access.WhenSpec(activate=start_date),
+        permission=access.Permission.EXECUTE,
     )
     #
     # Deployment
