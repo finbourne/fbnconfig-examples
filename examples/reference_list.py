@@ -1,4 +1,6 @@
-from fbnconfig import Deployment
+import datetime as dt
+
+from fbnconfig import Deployment, portfolio
 from fbnconfig import reference_list as rl
 
 
@@ -25,4 +27,25 @@ def configure(env):
             ]
         )
     )
-    return Deployment("reference_list_example", [strlist1, instrlist1])
+    pf1 = portfolio.PortfolioResource(
+        id="pf1",
+        scope="sc1",
+        code="example-portfolio",
+        display_name="Example Portfolio",
+        base_currency="USD",
+        created=dt.datetime(2024, 1, 1, tzinfo=dt.timezone.utc),
+        instrument_scopes=["sc1"],
+    )
+    pflist1 = rl.ReferenceListResource(
+        id="pflist1",
+        scope="sc1",
+        code="pflist1",
+        name="Portfolio ID List",
+        reference_list=rl.PortfolioIdList(
+            values=[pf1],
+        )
+    )
+    return Deployment(
+        "reference_list_example",
+        [pf1, strlist1, instrlist1, pflist1],
+    )

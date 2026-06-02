@@ -1,6 +1,9 @@
 
+import datetime as dt
+
 from fbnconfig import Deployment
 from fbnconfig import compliance as cp
+from fbnconfig import portfolio_group as pg
 from fbnconfig import property as pr
 
 
@@ -38,6 +41,14 @@ def configure(env):
             )
         ]
     )
+    group1 = pg.PortfolioGroupResource(
+        id="group1",
+        scope="sc1",
+        code="compliance-group",
+        display_name="Compliance Example Group",
+        description="Portfolio group for compliance example",
+        created=dt.datetime(2024, 1, 1, tzinfo=dt.timezone.utc),
+    )
     rule1 = cp.ComplianceRuleResource(
         id="rule1",
         scope="sc1",
@@ -47,10 +58,7 @@ def configure(env):
         active=True,
         template_id=template1,
         variation="Variation1",
-        portfolio_group_id=cp.ResourceId(
-            scope="robtest",
-            code="group10"
-        ),
+        portfolio_group_id=group1,
         parameters={
             "Branch-Step-1.BranchingKey": cp.GroupBySelectorComplianceParameter(value="1"),
         },
@@ -58,9 +66,9 @@ def configure(env):
             cp.PropertyListItem(
                 key=ccy,
                 value=cp.PropertyValue(
-                    label_value="USD",
+                    label_value="CHF",
                 ),
             )
         ]
     )
-    return Deployment("compliance_example", [template1, rule1])
+    return Deployment("compliance_example", [group1, template1, rule1])
