@@ -12,13 +12,15 @@ The script configures the following entities:
 def configure(env):
     scope = "example-scope"
 
+    system_string = datatype.DataTypeRef(id="system_string", scope="system", code="string")
+
     fund_manager_property = property.DefinitionResource(
         id="fund_manager_prop",
         domain=property.Domain.ChartOfAccounts,
         scope=scope,
         code="FundManagerName",
         display_name="FundManagerName",
-        data_type_id=datatype.DataTypeRef(id="default_str", scope="system", code="string"),
+        data_type_id=system_string,
         constraint_style=property.ConstraintStyle.Property,
         property_description="FundManagerName",
         life_time=property.LifeTime.Perpetual,
@@ -43,7 +45,7 @@ def configure(env):
         scope=scope,
         code="AccountantName",
         display_name="AccountantName",
-        data_type_id=property.ResourceId(scope="system", code="string"),
+        data_type_id=system_string,
         constraint_style=property.ConstraintStyle.Property,
         property_description="AccountantName",
         life_time=property.LifeTime.Perpetual,

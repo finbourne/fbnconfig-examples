@@ -12,6 +12,8 @@ https://support.lusid.com/knowledgebase/article/KA-01855/
 
 
 def configure(env):
+    system_number = datatype.DataTypeRef(id="system_number", scope="system", code="number")
+
     dom_ccy = property.DefinitionRef(
         id="dfdomccy", domain=property.Domain.Holding, scope="default", code="DfDomCcy"
     )
@@ -39,7 +41,7 @@ def configure(env):
         scope="sc1",
         code="pd1",
         display_name="Property definition example",
-        data_type_id=property.ResourceId(scope="system", code="number"),
+        data_type_id=system_number,
         constraint_style=property.ConstraintStyle.Property,
         property_description="Example property definition",
         life_time=property.LifeTime.Perpetual,
@@ -49,7 +51,7 @@ def configure(env):
     pv_nominal = property.DefinitionResource(
         id="derived",
         domain=property.Domain.Holding,
-        data_type_id=property.ResourceId(scope="system", code="number"),
+        data_type_id=system_number,
         scope="sc1",
         code="PVNominal",
         property_description="Example derived property",
@@ -60,7 +62,7 @@ def configure(env):
     derived_property = property.DefinitionResource(
         id="derived_property",
         domain=property.Domain.Holding,
-        data_type_id=property.ResourceId(scope="system", code="number"),
+        data_type_id=system_number,
         scope="sc1",
         code="derived_property",
         property_description="pd1 x df x nominal",
